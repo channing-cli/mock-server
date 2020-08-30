@@ -5,7 +5,7 @@ const Mock = require('mockjs')
 const Random = Mock.Random
 Random.name()
 Random.city(true)
-const format = 'yyyy年 M月 d日'
+const format = 'yyyy-M-d'
 Random.boolean()
 
 Random.extend({
@@ -18,6 +18,9 @@ Random.constellation()
     // => "水瓶座"
 Mock.mock('@CONSTELLATION')
     // => "天蝎座"
+
+
+
 
 
 router.get('/', async(ctx) => {
@@ -35,6 +38,14 @@ router.get('/list', async(ctx) => {
             constellation: '@CONSTELLATION'
         }]
     })
+
+    /*阻塞接口数据返回*/
+    await new Promise(resolve=>{
+        setTimeout(()=>{
+            resolve()
+        },1500)
+    })
+
     ctx.body = {
         code: 0,
         data,
